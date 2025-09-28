@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Tableau style dessin</title>
+<style>
+  :root{
+    --border: #333;
+    --gap: 8px;
+    --header-width: 48px; /* largeur de la bande verticale à droite */
+    --left-col-width: 120px; /* colonne étroite gauche */
+  }
+
+  body{
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    padding: 20px;
+    background: #fafafa;
+  }
+
+  .table-wrap{
+    display: grid;
+    grid-template-columns: 1fr auto; /* zone principale + bande verticale */
+    gap: 0;
+    border: 2px solid var(--border);
+    max-width: 920px;
+  }
+
+  /* bande verticale droite (texte tourné) */
+  .side-label{
+    writing-mode: vertical-rl;     /* texte vertical */
+    text-orientation: mixed;
+    transform: rotate(180deg);     /* pour que le texte lise de bas en haut comme dans l'image */
+    background: #fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding: 10px 6px;
+    width: var(--header-width);
+    border-left: 2px solid var(--border);
+    box-sizing: border-box;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+
+  /* zone principale du tableau */
+  .grid-main{
+    display: grid;
+    grid-template-columns: var(--left-col-width) 1fr 1fr;
+    grid-auto-rows: 120px;
+    gap: 0;
+  }
+
+  /* ligne du haut qui traverse les trois colonnes (zone de titre/remarques) */
+  .top-row{
+    grid-column: 1 / span 3;
+    border-bottom: 2px solid var(--border);
+    padding: 10px;
+    box-sizing: border-box;
+    min-height: 80px;
+  }
+
+  /* cellules normales */
+  .cell{
+    border-right: 2px solid var(--border);
+    border-bottom: 2px solid var(--border);
+    padding: 12px;
+    box-sizing: border-box;
+    background: #fff;
+  }
+
+  /* enlever la bordure droite pour la dernière colonne */
+  .cell.col3{
+    border-right: none;
+  }
+
+  /* styles spécifiques au contenu ressemblant à l'image */
+  .left-checks {
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    align-items:flex-start;
+  }
+  .checkbox-row{
+    display:flex;
+    gap:8px;
+    align-items:center;
+  }
+  .box {
+    width:18px;
+    height:18px;
+    border:2px solid var(--border);
+    display:inline-block;
+  }
+
+  .big-label{
+    font-size:26px;
+    font-weight:500;
+    text-align:center;
+    color:#222;
+  }
+
+  .sub-label{
+    font-size:18px;
+    text-align:center;
+    color:#444;
+  }
+
+  /* pour resserrer l'aspect "dessin" on peut utiliser une police manuscrite si l'utilisateur veut :
+     font-family: "Comic Sans MS", "Bradley Hand", "Segoe Print", cursive;
+  */
+  @media (max-width:760px){
+    .grid-main{
+      grid-template-columns: 90px 1fr;
+      grid-auto-rows: 100px;
+    }
+    .cell.col3{ display:none; } /* sur petit écran on masque la 3e colonne pour garder lisibilité */
+  }
+
+</style>
+</head>
+<body>
+
+<div class="table-wrap">
+  <!-- zone principale -->
+  <div class="grid-main">
+    <!-- top row (remarques / titre en haut) -->
+    <div class="top-row">
+      <!-- tu peux remplacer le texte ci-dessous par ce que tu veux -->
+      <strong>En-tête / Remarques (ex. : Etq. - Bli6 - GESTION)</strong>
+    </div>
+
+    <!-- colonne gauche (cases / petits éléments) -->
+    <div class="cell left-col">
+      <div class="left-checks">
+        <div class="checkbox-row"><span class="box"></span> <small>morn</small></div>
+        <div class="checkbox-row"><span class="box"></span> <small>prenom</small></div>
+        <div class="checkbox-row"><span class="box"></span> <small>0/0</small></div>
+        <!-- trois barres comme sur le dessin -->
+        <div style="margin-top:8px;">
+          <div style="height:10px;background:#fff;border:2px solid var(--border);width:70%;margin-bottom:6px;"></div>
+          <div style="height:10px;background:#fff;border:2px solid var(--border);width:85%;margin-bottom:6px;"></div>
+          <div style="height:10px;background:#fff;border:2px solid var(--border);width:60%;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- colonne centrale (Classe) -->
+    <div class="cell col2">
+      <div class="big-label">Classe</div>
+      <div class="sub-label" style="margin-top:6px;">— informations / notes —</div>
+    </div>
+
+    <!-- colonne droite (Cycle 2) -->
+    <div class="cell col3">
+      <div class="big-label">Cycle 2</div>
+      <div class="sub-label" style="margin-top:6px;">(ex : CYCLE 2)</div>
+    </div>
+
+    <!-- lignes vides supplémentaires (3 rangées vides comme sur l'image) -->
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell col3"></div>
+
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell col3"></div>
+  </div>
+
+  <!-- bande verticale droite -->
+  <div class="side-label">FICHES DE PENSÉE / SIGNIFIANT</div>
+</div>
+
+</body>
+</html>
