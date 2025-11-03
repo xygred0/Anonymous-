@@ -6,7 +6,7 @@
       <FRAMESET rows = "20%, *" frameborder="no">
       	<frame scrolling="yes" noresize ="yes" frameborder="no" src="Pages/haut.html"> </frame>
       	<frameset cols="20%, *" frameborder="no"> 
-          <frame src = "Pages/Classes.html" scrolling="yes" noresize ="yes">  </frame>
+          <frame src = "Pages/Classes.html" scrolling="yes" noresize ="yes">  </frame>hjddh
           <frame scrolling="yes" noresize ="yes" name="principale"> </frame>
       	</frameset>
       	
